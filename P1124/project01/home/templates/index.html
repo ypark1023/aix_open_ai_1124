@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 여행 플래너</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f5f9;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 460px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #328b8b;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #203349;
+            margin: 15px 0;
+        }
+
+        p {
+            color: #7a8795;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #dce4eb;
+            border-radius: 9px;
+            background: #f9fafc;
+            font-size: 15px;
+            outline-color: #328b8b;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 9px;
+            background: #328b8b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #246d6d;
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            color: #83909e;
+            font-size: 12px;
+        }
+        .chatbot-button {
+            display: block;
+            text-decoration: none;
+            background: #328b8b;
+            color: white;
+            padding: 16px;
+            margin-top: 12px;
+            border-radius: 9px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .chatbot-button:hover {
+            background: #246d6d;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">🌍</div>
+        <div class="subtitle">AI TRAVEL PLANNER</div>
+
+        <h1>어디로 떠나볼까요?</h1>
+
+        <p>
+            가고 싶은 여행지만 알려주세요.<br>
+            AI가 당신의 1박 2일 여행을 설계해 드립니다.
+        </p>
+
+        <form method="GET" action="/tour/tour/">
+            {% csrf_token %}
+
+            <input type="text"
+                name="destination"
+                placeholder="예: 부산, 강릉, 경주"
+                required>
+
+            <button type="submit">
+                여행 일정 짜기 →
+            </button>
+        </form>
+
+        <a href="/chatbot/chatbot/" class="chatbot-button">
+                🤖 챗봇과 여행 상의하기 →
+        </a>
+
+        <div class="features">
+            <span>🚆 교통</span>
+            <span>📅 1박 2일</span>
+            <span>🍴 맛집 추천</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

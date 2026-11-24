@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 여행 플래너 - 여행 일정</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f5f9;
+            color: #203349;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: #328b8b;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .header {
+            background: #328b8b;
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 15px 0;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        /* 공통 카드 디자인 */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 21px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8eff2;
+        }
+
+        .content {
+            font-size: 15px;
+            line-height: 1.9;
+            overflow-wrap: anywhere;
+        }
+
+        /* 숙소와 식사 영역을 가로로 배치 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* 일정 카드 강조 */
+        .schedule {
+            border-top: 4px solid #328b8b;
+        }
+
+        .back-button {
+            display: block;
+            padding: 16px;
+            border: 1px solid #328b8b;
+            border-radius: 10px;
+            color: #328b8b;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .back-button:hover {
+            background: #328b8b;
+            color: white;
+        }
+
+        .notice {
+            text-align: center;
+            color: #83909e;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 25px;
+        }
+
+        .error {
+            color: #b91c1c;
+            background: #fef2f2;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* 모바일 화면 대응 */
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            🌍 AI TRAVEL PLANNER
+        </div>
+
+        <div class="header">
+            <div class="subtitle">
+                YOUR NEXT DESTINATION
+            </div>
+
+            <h1>{{ destination }} 여행 플랜</h1>
+
+            <p>당신을 위한 맞춤형 여행 일정</p>
+
+            <div class="features">
+                <span>📅 1박 2일</span>
+                <span>🚆 교통</span>
+                <span>🍴 맛집 추천</span>
+            </div>
+        </div>
+
+        {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+        {% else %}
+
+            <!-- 1. 한눈에 보는 여행 일정 -->
+            <section class="card schedule">
+                <h2>📅 한눈에 보는 여행 일정</h2>
+
+                <div class="content">
+                    {{ schedule|linebreaksbr }}
+                </div>
+            </section>
+
+            <!-- 2. 여행지 설명 -->
+            <section class="card">
+                <h2>📍 여행지 설명</h2>
+
+                <div class="content">
+                    {{ places|linebreaksbr }}
+                </div>
+            </section>
+
+            <div class="grid">
+
+                <!-- 3. 숙소 추천 -->
+                <section class="card">
+                    <h2>🏨 숙소 추천</h2>
+
+                    <div class="content">
+                        {{ hotels|linebreaksbr }}
+                    </div>
+                </section>
+
+                <!-- 4. 식사 추천 -->
+                <section class="card">
+                    <h2>🍴 식사 추천</h2>
+
+                    <div class="content">
+                        {{ foods|linebreaksbr }}
+                    </div>
+                </section>
+
+            </div>
+
+        {% endif %}
+
+        <a href="/" class="back-button">
+            ← 새로운 여행 일정 짜기
+        </a>
+
+        <div class="notice">
+            AI가 생성한 여행 일정입니다.<br>
+            실제 운영시간과 교통편을 확인해주세요.
+        </div>
+
+    </div>
+
+</body>
+</html>
